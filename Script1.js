@@ -1,4 +1,6 @@
 // JavaScript source code
+"use strict";
+window.addEventListener("load",start)
 class CircularBuffer {
     constructor(capacity) {
         this.capacity = capacity;
@@ -10,15 +12,18 @@ class CircularBuffer {
     add(data) {
         this.buffer[this.writeIndex] = data;
         this.writeIndex++;
+        console.log(this.writeIndex);
     }
     remove() {
         peek();
         this.buffer[this.readIndex] = null;
         this.readIndex++;
+        console.log(this.readIndex);
 
     }
     peek() {
         const data = this.buffer[this.readIndex];
+        console.log(data)
         return data;
     }
     isEmpty() {
@@ -36,4 +41,7 @@ class CircularBuffer {
         }
     }
 
+}
+function start() {
+    const buffer = new CircularBuffer(10);
 }
