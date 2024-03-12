@@ -9,15 +9,28 @@ class CircularBuffer {
 
     }
     add(data) {
+        if (this.isFull()) {
+            throw new Error('Buffer is full');
+        }else if(this.writeIndex === this.capacity){
+            this.writeIndex = 0;
+        }
         this.buffer[this.writeIndex] = data;
         this.writeIndex++;
-        
     }
+   
     remove() {
+        if (this.isEmpty()) {
+            throw new Error('Buffer is empty');
+        } else {
         const data = this.buffer[this.readIndex];
         this.buffer[this.readIndex] = null;
-        this.readIndex++;
-        return data;
+        if(this.readIndex === this.capacity - 1){
+          this.readIndex= 0;  
+        }else{
+          this.readIndex++;
+        }
+         return data;
+      }
 
     }
     peek() {
